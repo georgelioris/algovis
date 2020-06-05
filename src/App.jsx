@@ -23,13 +23,13 @@ function App() {
     paused.current = true;
     index.current = 0;
     setValues(initValues);
+    setButton(true);
     setData(memoData);
   }, [sortingMethod, memoData]);
 
   function pause() {
     playing.current = false;
     paused.current = true;
-    setButton(true);
   }
 
   function play() {
@@ -41,18 +41,19 @@ function App() {
       const looping = setInterval(() => {
         if (index.current >= Object.keys(data).length || paused.current) {
           playing.current = false;
+          setButton(true);
           clearInterval(looping);
         } else {
           setValues(data[index.current]);
           index.current += 1;
         }
-      }, 500);
+      }, 100);
     }
   }
 
-  useEffect(() => {
-    console.log((index.current * 100) / Object.keys(data).length);
-  });
+  // useEffect(() => {
+  //   console.log(Object.keys(data).length);
+  // }, [data]);
 
   return (
     <div className="container">
@@ -77,7 +78,7 @@ function App() {
       </div>
       <div className="row  d-flex justify-content-center">
         <ProgressBar
-          now={(index.current * 100) / Object.keys(data).length}
+          now={Math.round((index.current * 100) / Object.keys(data).length)}
           animated={!button}
         />
       </div>
@@ -87,8 +88,8 @@ function App() {
             <DataBox
               key={value}
               value={value}
-              pointer1={values.pointer.i === i}
-              pointer2={values.pointer.j === i}
+              pointer1={values.pointer && values.pointer.i === i}
+              pointer2={values.pointer && values.pointer.j === i}
             />
           ))}
       </div>
