@@ -49,6 +49,37 @@ const sorting = {
     data[Object.keys(data).length] = { step: [...array], pointer: null };
 
     return data;
+  },
+
+  insertionSort: inputArr => {
+    const array = [...inputArr];
+    const data = {};
+
+    for (let i = 0; i < array.length; i += 1) {
+      let currentIndex = i;
+
+      while (
+        array[currentIndex - 1] !== undefined &&
+        array[currentIndex] < array[currentIndex - 1]
+      ) {
+        const step = [...array];
+        [array[currentIndex], array[currentIndex - 1]] = [
+          array[currentIndex - 1],
+          array[currentIndex]
+        ];
+
+        data[Object.keys(data).length] = {
+          step,
+          pointer: { i: currentIndex, j: currentIndex - 1 }
+        };
+
+        currentIndex -= 1;
+      }
+    }
+
+    data[Object.keys(data).length] = { step: [...array], pointer: null };
+
+    return data;
   }
 };
 
