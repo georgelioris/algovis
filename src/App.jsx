@@ -76,7 +76,14 @@ function App() {
       <div className="row  d-flex justify-content-center">
         <div>{index.current}</div>
       </div>
-      <div className="row  d-flex justify-content-center">
+      <div
+        className="row  d-flex justify-content-center"
+        style={{
+          padding: 'inherit',
+          maxWidth: 'inherit',
+          width: 'inehrit'
+        }}
+      >
         <ProgressBar
           now={Math.round((index.current * 100) / Object.keys(data).length)}
           animated={!button}
