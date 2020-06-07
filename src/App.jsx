@@ -1,4 +1,4 @@
-import React, {useEffect, useMemo, useRef, useState} from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import ProgressBar from 'react-bootstrap/ProgressBar';
 import './App.css';
 import Controls from './components/Controls';
@@ -12,7 +12,7 @@ function App() {
   const [data, setData] = useState({});
   const [values, setValues] = useState(initValues);
   const [sortingMethod, setSortingMethod] = useState(Object.keys(sorting)[0]);
-  const [ playing, setPlaying ] = useState(false);
+  const [playing, setPlaying] = useState(false);
   const index = useRef(0);
   const speed = useRef(200);
   const paused = useRef(false);
@@ -25,7 +25,9 @@ function App() {
     setData(memoData);
   }, [sortingMethod, memoData]);
 
-  function handleSpeedChange(val) { speed.current = Number(val) };
+  function handleSpeedChange(val) {
+    speed.current = Number(val);
+  }
 
   function pause() {
     paused.current = true;
@@ -35,10 +37,10 @@ function App() {
     paused.current = false;
     if (index.current === Object.keys(data).length) index.current = 0;
     if (!playing && Object.keys(data).length) {
-      setPlaying(true)
+      setPlaying(true);
       const looping = setInterval(() => {
         if (index.current >= Object.keys(data).length || paused.current) {
-          setPlaying(false)
+          setPlaying(false);
           clearInterval(looping);
         } else {
           setValues(data[index.current]);
@@ -51,13 +53,25 @@ function App() {
   return (
     <div className="container">
       <div className="row d-flex justify-content-center">
-        <Controls {...{ play, pause, playing, speed, handleSpeedChange, sorting, setSortingMethod }} />
+        <Controls
+          {...{
+            play,
+            pause,
+            playing,
+            speed,
+            handleSpeedChange,
+            sorting,
+            setSortingMethod
+          }}
+        />
       </div>
-      <div className="row d-flex justify-content-center">
-      </div>
+      <div className="row d-flex justify-content-center" />
 
       <div className="row  d-flex justify-content-center">
-        <div>Iteration: {index.current}</div>
+        <div>
+          Iteration:
+          {index.current}
+        </div>
       </div>
       <div
         className="row  d-flex justify-content-center"
