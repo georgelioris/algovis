@@ -1,9 +1,8 @@
-import React, { useEffect, useRef, useState, useMemo } from 'react';
-import './App.css';
-import Form from 'react-bootstrap/Form';
+import React, {useEffect, useMemo, useRef, useState} from 'react';
 import ProgressBar from 'react-bootstrap/ProgressBar';
-import DataBox from './components/DataBox';
+import './App.css';
 import Controls from './components/Controls';
+import DataBox from './components/DataBox';
 import sorting from './lib/algorithms/sorting';
 import nums from './lib/nums';
 
@@ -13,9 +12,9 @@ function App() {
   const [data, setData] = useState({});
   const [values, setValues] = useState(initValues);
   const [sortingMethod, setSortingMethod] = useState(Object.keys(sorting)[0]);
-  const [button, setButton] = useState(true);
+  const [ playing, setPlaying ] = useState(false);
   const index = useRef(0);
-  const playing = useRef(false);
+  const speed = useRef(200);
   const paused = useRef(false);
   const memoData = useMemo(() => sorting[sortingMethod](nums), [sortingMethod]);
 
@@ -23,58 +22,42 @@ function App() {
     paused.current = true;
     index.current = 0;
     setValues(initValues);
-    setButton(true);
     setData(memoData);
   }, [sortingMethod, memoData]);
 
+  function handleSpeedChange(val) { speed.current = Number(val) };
+
   function pause() {
-    playing.current = false;
     paused.current = true;
   }
 
   function play() {
     paused.current = false;
-    setButton(false);
     if (index.current === Object.keys(data).length) index.current = 0;
-    if (!playing.current && Object.keys(data).length) {
-      playing.current = true;
+    if (!playing && Object.keys(data).length) {
+      setPlaying(true)
       const looping = setInterval(() => {
         if (index.current >= Object.keys(data).length || paused.current) {
-          playing.current = false;
-          setButton(true);
+          setPlaying(false)
           clearInterval(looping);
         } else {
           setValues(data[index.current]);
           index.current += 1;
         }
-      }, 100);
+      }, speed.current);
     }
   }
-
-  // useEffect(() => {
-  //   console.log(Object.keys(data).length);
-  // }, [data]);
 
   return (
     <div className="container">
       <div className="row d-flex justify-content-center">
-        <Controls {...{ button, play, pause }} />
+        <Controls {...{ play, pause, playing, speed, handleSpeedChange, sorting, setSortingMethod }} />
       </div>
       <div className="row d-flex justify-content-center">
-        <Form.Group>
-          <Form.Control
-            as="select"
-            size="lg"
-            onChange={e => setSortingMethod(e.target.value)}
-          >
-            {Object.keys(sorting).map((i, key) => (
-              <option key={key}>{i}</option>
-            ))}
-          </Form.Control>
-        </Form.Group>
       </div>
+
       <div className="row  d-flex justify-content-center">
-        <div>{index.current}</div>
+        <div>Iteration: {index.current}</div>
       </div>
       <div
         className="row  d-flex justify-content-center"
@@ -86,7 +69,7 @@ function App() {
       >
         <ProgressBar
           now={Math.round((index.current * 100) / Object.keys(data).length)}
-          animated={!button}
+          animated={playing}
         />
       </div>
       <div className="data-container">
