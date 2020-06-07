@@ -45,3 +45,8 @@
   max-width: 34.25rem;
   margin: 0.625rem 0 0.625rem 0;
 }
+
+.form-group > select,
+option {
+  text-transform: capitalize;
+}
