@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import { PauseFill, PlayFill } from 'react-bootstrap-icons';
 import Button from 'react-bootstrap/Button';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
@@ -55,7 +56,7 @@ const Buttons = ({ playing, play, pause }) => {
           className="controls"
           variant="primary"
           onClick={() => {
-            !playing && play();
+            if (!playing) play();
             setDisabled(false);
           }}
         >
@@ -79,7 +80,6 @@ const Buttons = ({ playing, play, pause }) => {
 };
 
 const Controls = ({
-  button,
   playing,
   play,
   pause,
@@ -99,10 +99,59 @@ const Controls = ({
         </Col>
       </div>
       <div className="row  d-flex justify-content-center">
-        <Buttons {...{ button, play, pause, playing }} />
+        <Buttons {...{ play, pause, playing }} />
       </div>
     </div>
   );
+};
+
+Methods.propTypes = {
+  sorting: PropTypes.objectOf(PropTypes.func),
+  setSortingMethod: PropTypes.func
+};
+Methods.defaultProps = {
+  sorting: undefined,
+  setSortingMethod: undefined
+};
+Slider.propTypes = {
+  speed: PropTypes.shape({ current: PropTypes.number }),
+  playing: PropTypes.bool,
+  handleSpeedChange: PropTypes.func
+};
+Slider.defaultProps = {
+  speed: undefined,
+  playing: undefined,
+  handleSpeedChange: undefined
+};
+Buttons.propTypes = {
+  playing: PropTypes.bool,
+  play: PropTypes.func,
+  pause: PropTypes.func
+};
+
+Buttons.defaultProps = {
+  playing: undefined,
+  play: undefined,
+  pause: undefined
+};
+Controls.propTypes = {
+  playing: PropTypes.bool,
+  play: PropTypes.func,
+  pause: PropTypes.func,
+  speed: PropTypes.shape({ current: PropTypes.number }),
+  handleSpeedChange: PropTypes.func,
+  sorting: PropTypes.objectOf(PropTypes.func),
+  setSortingMethod: PropTypes.func
+};
+
+Controls.defaultProps = {
+  playing: undefined,
+  play: undefined,
+  pause: undefined,
+  speed: undefined,
+  handleSpeedChange: undefined,
+  sorting: undefined,
+  setSortingMethod: undefined
 };
 
 export default Controls;
