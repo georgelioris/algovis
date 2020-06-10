@@ -1,3 +1,5 @@
+import { swap } from '../helpers';
+
 const sorting = {
   selectionSort: inputArr => {
     const array = [...inputArr];
@@ -12,7 +14,7 @@ const sorting = {
 
       if (minIndex !== i) {
         const step = [...array];
-        [array[i], array[minIndex]] = [array[minIndex], array[i]];
+        swap(array, i, minIndex);
         data[Object.keys(data).length] = {
           step,
           pointer: { i, j: minIndex }
@@ -20,7 +22,7 @@ const sorting = {
       }
     }
 
-    data[Object.keys(data).length] = { step: [...array], pointer: null };
+    data[Object.keys(data).length] = { step: array, pointer: null };
 
     return data;
   },
@@ -34,7 +36,7 @@ const sorting = {
       for (let j = 0; j < array.length - i; j += 1) {
         if (array[j + 1] < array[j]) {
           const step = [...array];
-          [array[j], array[j + 1]] = [array[j + 1], array[j]];
+          swap(array, j, j + 1);
           data[Object.keys(data).length] = {
             step,
             pointer: { i: j, j: j + 1 }
@@ -46,7 +48,7 @@ const sorting = {
       if (!swapped) return data;
     }
 
-    data[Object.keys(data).length] = { step: [...array], pointer: null };
+    data[Object.keys(data).length] = { step: array, pointer: null };
 
     return data;
   },
@@ -63,11 +65,7 @@ const sorting = {
         array[currentIndex] < array[currentIndex - 1]
       ) {
         const step = [...array];
-        [array[currentIndex], array[currentIndex - 1]] = [
-          array[currentIndex - 1],
-          array[currentIndex]
-        ];
-
+        swap(array, currentIndex, currentIndex - 1);
         data[Object.keys(data).length] = {
           step,
           pointer: { i: currentIndex, j: currentIndex - 1 }
@@ -77,7 +75,7 @@ const sorting = {
       }
     }
 
-    data[Object.keys(data).length] = { step: [...array], pointer: null };
+    data[Object.keys(data).length] = { step: array, pointer: null };
 
     return data;
   }
