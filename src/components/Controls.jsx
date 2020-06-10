@@ -16,8 +16,8 @@ const Methods = ({ sorting, setSortingMethod }) => (
         setSortingMethod(e.target.value);
       }}
     >
-      {Object.keys(sorting).map((i, key) => (
-        <option key={key}>{i}</option>
+      {Object.keys(sorting).map(method => (
+        <option key={method}>{method}</option>
       ))}
     </Form.Control>
   </Form.Group>
