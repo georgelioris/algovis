@@ -1,4 +1,4 @@
-import { swap } from '../helpers';
+import { swap, partition } from '../helpers';
 
 const sorting = {
   selectionSort: inputArr => {
@@ -84,43 +84,17 @@ const sorting = {
     const array = [...inputArr];
     const data = {};
 
-    function partition(input, left, right) {
-      const pivot = input[Math.floor((right + left) / 2)]; // middle element
-      let i = left; // left pointer
-      let j = right; // right pointer
-      while (i <= j) {
-        while (array[i] < pivot) {
-          i += 1;
-        }
-        while (array[j] > pivot) {
-          j -= 1;
-        }
-        if (i <= j) {
-          const step = [...array];
-          swap(array, i, j); // sawpping two elements
-          data[Object.keys(data).length] = { step, pointer: { i, j } };
-          i += 1;
-          j -= 1;
-        }
-      }
-      return i;
-    }
-
     function sort(input, left, right) {
       let index;
       if (input.length > 1) {
-        index = partition(input, left, right);
+        index = partition(input, left, right, data);
       }
-
       if (left < index - 1) {
-        // more elements on the left side of the pivot
         sort(input, left, index - 1);
       }
       if (index < right) {
-        // more elements on the right side of the pivot
         sort(input, index, right);
       }
-
       return input;
     }
 

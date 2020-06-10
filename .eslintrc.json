@@ -16,7 +16,11 @@
     "react/jsx-indent-props": 0,
     "react/jsx-indent": 0,
     "react/jsx-closing-bracket-location": 0,
-    "react/jsx-props-no-spreading":0,
-    "no-nested-ternary": "warn"
+    "react/jsx-props-no-spreading": 0,
+    "no-nested-ternary": 0,
+    "no-param-reassign": [
+      2,
+      { "props": true, "ignorePropertyModificationsFor": ["data", "input"] }
+    ]
   }
 }
