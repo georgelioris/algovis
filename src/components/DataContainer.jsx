@@ -24,6 +24,19 @@ const DataBox = ({ value, isI, isJ }) => {
   );
 };
 
+const DataContainer = ({ step, pointer }) => (
+  <div className="data-container">
+    {step.map((value, i) => (
+      <DataBox
+        key={value}
+        value={value}
+        isI={pointer && pointer.i === i}
+        isJ={pointer && pointer.j === i}
+      />
+    ))}
+  </div>
+);
+
 DataBox.propTypes = {
   value: PropTypes.number.isRequired,
   isI: PropTypes.bool,
@@ -33,5 +46,12 @@ DataBox.defaultProps = {
   isI: undefined,
   isJ: undefined
 };
+DataContainer.propTypes = {
+  step: PropTypes.arrayOf(PropTypes.number).isRequired,
+  pointer: PropTypes.shape({
+    i: PropTypes.oneOfType([PropTypes.number, PropTypes.instanceOf(null)]),
+    j: PropTypes.oneOfType([PropTypes.number, PropTypes.instanceOf(null)])
+  }).isRequired
+};
 
-export default DataBox;
+export default DataContainer;

@@ -1,8 +1,6 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
-import ProgressBar from 'react-bootstrap/ProgressBar';
 import './App.css';
-import Controls from './components/Controls';
-import DataBox from './components/DataBox';
+import Page from './containers/Page';
 import sorting from './lib/algorithms/sorting';
 import nums from './lib/nums';
 
@@ -51,53 +49,20 @@ function App() {
   }
 
   return (
-    <div className="container">
-      <div className="row d-flex justify-content-center">
-        <Controls
-          {...{
-            play,
-            pause,
-            playing,
-            speed,
-            handleSpeedChange,
-            sorting,
-            setSortingMethod
-          }}
-        />
-      </div>
-      <div className="row d-flex justify-content-center" />
-
-      <div className="row  d-flex justify-content-center">
-        <div>
-          Iteration:
-          {index.current}
-        </div>
-      </div>
-      <div
-        className="row  d-flex justify-content-center"
-        style={{
-          padding: 'inherit',
-          maxWidth: 'inherit',
-          width: 'inehrit'
-        }}
-      >
-        <ProgressBar
-          now={Math.round((index.current * 100) / Object.keys(data).length)}
-          animated={playing}
-        />
-      </div>
-      <div className="data-container">
-        {values &&
-          values.step.map((value, i) => (
-            <DataBox
-              key={value}
-              value={value}
-              isI={values.pointer && values.pointer.i === i}
-              isJ={values.pointer && values.pointer.j === i}
-            />
-          ))}
-      </div>
-    </div>
+    <Page
+      {...{
+        play,
+        pause,
+        playing,
+        speed,
+        handleSpeedChange,
+        sorting,
+        setSortingMethod,
+        data,
+        index,
+        values
+      }}
+    />
   );
 }
 
