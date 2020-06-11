@@ -1,14 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const DataBox = ({ value, pointer1, pointer2 }) => {
-  const background = pointer1
+const DataBox = ({ value, isI, isJ }) => {
+  const background = isI
     ? '#EDB458'
-    : pointer2
+    : isJ
     ? '#E8871E'
     : `hsl(260,${100 - 100 / value}%,${100 - value}%)`;
   const border = `5px solid ${
-    pointer1 && !pointer2 ? '#EDB458' : pointer2 ? '#E8871E' : background
+    isI && !isJ ? '#EDB458' : isJ ? '#E8871E' : background
   }`;
 
   return (
@@ -25,14 +25,13 @@ const DataBox = ({ value, pointer1, pointer2 }) => {
 };
 
 DataBox.propTypes = {
-  value: PropTypes.number,
-  pointer1: PropTypes.bool,
-  pointer2: PropTypes.bool
+  value: PropTypes.number.isRequired,
+  isI: PropTypes.bool,
+  isJ: PropTypes.bool
 };
 DataBox.defaultProps = {
-  value: undefined,
-  pointer1: undefined,
-  pointer2: undefined
+  isI: undefined,
+  isJ: undefined
 };
 
 export default DataBox;

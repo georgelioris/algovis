@@ -92,8 +92,8 @@ function App() {
             <DataBox
               key={value}
               value={value}
-              pointer1={values.pointer && values.pointer.i === i}
-              pointer2={values.pointer && values.pointer.j === i}
+              isI={values.pointer && values.pointer.i === i}
+              isJ={values.pointer && values.pointer.j === i}
             />
           ))}
       </div>

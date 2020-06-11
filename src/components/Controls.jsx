@@ -106,52 +106,27 @@ const Controls = ({
 };
 
 Methods.propTypes = {
-  sorting: PropTypes.objectOf(PropTypes.func),
-  setSortingMethod: PropTypes.func
-};
-Methods.defaultProps = {
-  sorting: undefined,
-  setSortingMethod: undefined
+  sorting: PropTypes.objectOf(PropTypes.func).isRequired,
+  setSortingMethod: PropTypes.func.isRequired
 };
 Slider.propTypes = {
-  speed: PropTypes.shape({ current: PropTypes.number }),
-  playing: PropTypes.bool,
-  handleSpeedChange: PropTypes.func
-};
-Slider.defaultProps = {
-  speed: undefined,
-  playing: undefined,
-  handleSpeedChange: undefined
+  speed: PropTypes.shape({ current: PropTypes.number }).isRequired,
+  playing: PropTypes.bool.isRequired,
+  handleSpeedChange: PropTypes.func.isRequired
 };
 Buttons.propTypes = {
-  playing: PropTypes.bool,
-  play: PropTypes.func,
-  pause: PropTypes.func
-};
-
-Buttons.defaultProps = {
-  playing: undefined,
-  play: undefined,
-  pause: undefined
+  playing: PropTypes.bool.isRequired,
+  play: PropTypes.func.isRequired,
+  pause: PropTypes.func.isRequired
 };
 Controls.propTypes = {
-  playing: PropTypes.bool,
-  play: PropTypes.func,
-  pause: PropTypes.func,
-  speed: PropTypes.shape({ current: PropTypes.number }),
-  handleSpeedChange: PropTypes.func,
-  sorting: PropTypes.objectOf(PropTypes.func),
-  setSortingMethod: PropTypes.func
-};
-
-Controls.defaultProps = {
-  playing: undefined,
-  play: undefined,
-  pause: undefined,
-  speed: undefined,
-  handleSpeedChange: undefined,
-  sorting: undefined,
-  setSortingMethod: undefined
+  playing: PropTypes.bool.isRequired,
+  play: PropTypes.func.isRequired,
+  pause: PropTypes.func.isRequired,
+  speed: PropTypes.shape({ current: PropTypes.number }).isRequired,
+  handleSpeedChange: PropTypes.func.isRequired,
+  sorting: PropTypes.objectOf(PropTypes.func).isRequired,
+  setSortingMethod: PropTypes.func.isRequired
 };
 
 export default Controls;
