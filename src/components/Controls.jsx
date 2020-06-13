@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { PauseFill, PlayFill } from 'react-bootstrap-icons';
+import { PauseFill, PlayFill, ArrowClockwise } from 'react-bootstrap-icons';
 import Button from 'react-bootstrap/Button';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import Col from 'react-bootstrap/Col';
@@ -37,9 +37,9 @@ const Slider = ({ speed, handleSpeedChange, playing }) => {
           }}
           custom
           type="range"
-          min="100"
+          min="50"
           max="1500"
-          step="100"
+          step="50"
           value={value}
         />
       </Form.Group>
@@ -47,7 +47,7 @@ const Slider = ({ speed, handleSpeedChange, playing }) => {
   );
 };
 
-const Buttons = ({ playing, play, pause }) => {
+const Buttons = ({ playing, play, pause, shuffleNumbers }) => {
   const [disabled, setDisabled] = useState(true);
   return (
     <ButtonGroup size="lg">
@@ -75,6 +75,16 @@ const Buttons = ({ playing, play, pause }) => {
           <PauseFill size={32} />
         </Button>
       )}
+      <Button
+        disabled={playing}
+        className="controls"
+        variant="primary"
+        onClick={() => {
+          if (!playing) shuffleNumbers();
+        }}
+      >
+        <ArrowClockwise size={32} />
+      </Button>
     </ButtonGroup>
   );
 };
@@ -83,6 +93,7 @@ const Controls = ({
   playing,
   play,
   pause,
+  shuffleNumbers,
   speed,
   handleSpeedChange,
   sorting,
@@ -91,15 +102,15 @@ const Controls = ({
   return (
     <div className="container">
       <div className="row  d-flex justify-content-center">
-        <Col md={4}>
+        <Col md={3}>
           <Methods {...{ sorting, setSortingMethod }} />
         </Col>
-        <Col md={4}>
+        <Col md={3}>
           <Slider {...{ speed, handleSpeedChange, playing }} />
         </Col>
       </div>
       <div className="row  d-flex justify-content-center">
-        <Buttons {...{ play, pause, playing }} />
+        <Buttons {...{ play, pause, playing, shuffleNumbers }} />
       </div>
     </div>
   );
@@ -117,12 +128,14 @@ Slider.propTypes = {
 Buttons.propTypes = {
   playing: PropTypes.bool.isRequired,
   play: PropTypes.func.isRequired,
-  pause: PropTypes.func.isRequired
+  pause: PropTypes.func.isRequired,
+  shuffleNumbers: PropTypes.func.isRequired
 };
 Controls.propTypes = {
   playing: PropTypes.bool.isRequired,
   play: PropTypes.func.isRequired,
   pause: PropTypes.func.isRequired,
+  shuffleNumbers: PropTypes.func.isRequired,
   speed: PropTypes.shape({ current: PropTypes.number }).isRequired,
   handleSpeedChange: PropTypes.func.isRequired,
   sorting: PropTypes.objectOf(PropTypes.func).isRequired,

@@ -8,6 +8,7 @@ const Page = ({
   play,
   pause,
   playing,
+  shuffleNumbers,
   speed,
   handleSpeedChange,
   sorting,
@@ -23,6 +24,7 @@ const Page = ({
           play,
           pause,
           playing,
+          shuffleNumbers,
           speed,
           handleSpeedChange,
           sorting,
@@ -58,6 +60,7 @@ Page.propTypes = {
   play: PropTypes.func.isRequired,
   pause: PropTypes.func.isRequired,
   playing: PropTypes.bool.isRequired,
+  shuffleNumbers: PropTypes.func.isRequired,
   speed: PropTypes.shape({ current: PropTypes.number }).isRequired,
   handleSpeedChange: PropTypes.func.isRequired,
   setSortingMethod: PropTypes.func.isRequired,
@@ -67,8 +70,16 @@ Page.propTypes = {
   values: PropTypes.shape({
     step: PropTypes.arrayOf(PropTypes.number).isRequired,
     pointer: PropTypes.shape({
-      i: PropTypes.oneOfType([PropTypes.number, PropTypes.instanceOf(null)]),
-      j: PropTypes.oneOfType([PropTypes.number, PropTypes.instanceOf(null)])
+      i: PropTypes.number,
+      j: PropTypes.number
     })
-  }).isRequired
+  })
+};
+Page.defaultProps = {
+  values: {
+    pointer: {
+      i: null,
+      j: null
+    }
+  }
 };

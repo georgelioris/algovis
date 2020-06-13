@@ -2,26 +2,39 @@ import React, { useEffect, useMemo, useRef, useState } from 'react';
 import './App.css';
 import Page from './containers/Page';
 import sorting from './lib/algorithms/sorting';
+import { shuffle } from './lib/helpers';
 import nums from './lib/nums';
 
-const initValues = { step: nums, pointer: { i: null, j: null } };
+const initValues = initNums => ({
+  step: initNums,
+  pointer: { i: null, j: null }
+});
 
 function App() {
   const [data, setData] = useState({});
-  const [values, setValues] = useState(initValues);
+  const [values, setValues] = useState(initValues(nums));
   const [sortingMethod, setSortingMethod] = useState(Object.keys(sorting)[0]);
+  const [unsortedNums, setUnsortedNums] = useState(nums);
   const [playing, setPlaying] = useState(false);
   const index = useRef(0);
   const speed = useRef(200);
   const paused = useRef(false);
-  const memoData = useMemo(() => sorting[sortingMethod](nums), [sortingMethod]);
+  const memoData = useMemo(() => sorting[sortingMethod](unsortedNums), [
+    sortingMethod,
+    unsortedNums
+  ]);
 
   useEffect(() => {
     paused.current = true;
     index.current = 0;
-    setValues(initValues);
+    setValues(initValues(unsortedNums));
     setData(memoData);
-  }, [sortingMethod, memoData]);
+  }, [sortingMethod, unsortedNums, memoData]);
+
+  function shuffleNumbers() {
+    index.current = 0;
+    setUnsortedNums(shuffle(unsortedNums));
+  }
 
   function handleSpeedChange(val) {
     speed.current = Number(val);
@@ -48,12 +61,17 @@ function App() {
     }
   }
 
+  useEffect(() => {
+    console.log(unsortedNums);
+  }, [unsortedNums]);
+
   return (
     <Page
       {...{
         play,
         pause,
         playing,
+        shuffleNumbers,
         speed,
         handleSpeedChange,
         sorting,

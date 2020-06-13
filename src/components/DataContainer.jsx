@@ -49,9 +49,15 @@ DataBox.defaultProps = {
 DataContainer.propTypes = {
   step: PropTypes.arrayOf(PropTypes.number).isRequired,
   pointer: PropTypes.shape({
-    i: PropTypes.oneOfType([PropTypes.number, PropTypes.instanceOf(null)]),
-    j: PropTypes.oneOfType([PropTypes.number, PropTypes.instanceOf(null)])
-  }).isRequired
+    i: PropTypes.number,
+    j: PropTypes.number
+  })
+};
+DataContainer.defaultProps = {
+  pointer: {
+    i: null,
+    j: null
+  }
 };
 
 export default DataContainer;
