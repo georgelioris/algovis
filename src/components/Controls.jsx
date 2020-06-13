@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { PauseFill, PlayFill, ArrowClockwise } from 'react-bootstrap-icons';
 import Button from 'react-bootstrap/Button';
@@ -12,11 +12,11 @@ const Methods = ({ sorting, setSortingMethod }) => (
     <Form.Control
       as="select"
       size="md"
-      onChange={e => {
+      onChange={(e) => {
         setSortingMethod(e.target.value);
       }}
     >
-      {Object.keys(sorting).map(method => (
+      {Object.keys(sorting).map((method) => (
         <option key={method}>{method}</option>
       ))}
     </Form.Control>
@@ -31,7 +31,7 @@ const Slider = ({ speed, handleSpeedChange, playing }) => {
         <Form.Label>{`Delay: ${value}ms`}</Form.Label>
         <Form.Control
           disabled={playing}
-          onChange={e => {
+          onChange={(e) => {
             handleSpeedChange(e.target.value);
             setValue(e.target.value);
           }}
@@ -49,6 +49,7 @@ const Slider = ({ speed, handleSpeedChange, playing }) => {
 
 const Buttons = ({ playing, play, pause, shuffleNumbers }) => {
   const [disabled, setDisabled] = useState(true);
+  const shflBtn = useRef(null);
   return (
     <ButtonGroup size="lg">
       {!playing ? (
@@ -79,8 +80,10 @@ const Buttons = ({ playing, play, pause, shuffleNumbers }) => {
         disabled={playing}
         className="controls"
         variant="primary"
+        ref={shflBtn}
         onClick={() => {
           if (!playing) shuffleNumbers();
+          shflBtn.current.blur();
         }}
       >
         <ArrowClockwise size={32} />

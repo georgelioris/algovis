@@ -45,18 +45,6 @@
   box-shadow: none;
 }
 
-.btn-group-lg,
-.btn-primary.focus,
-.btn-primary:focus {
-  box-shadow: none !important;
-}
-
-.btn-group-lg,
-.btn-danger.focus,
-.btn-danger:focus {
-  box-shadow: none !important;
-}
-
 .progress {
   width: 100%;
   max-width: 34.25rem;
