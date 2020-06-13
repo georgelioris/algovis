@@ -5,7 +5,7 @@ import sorting from './lib/algorithms/sorting';
 import { shuffle } from './lib/helpers';
 import nums from './lib/nums';
 
-const initValues = initNums => ({
+const initValues = (initNums) => ({
   step: initNums,
   pointer: { i: null, j: null }
 });
@@ -67,7 +67,7 @@ function App() {
 
   return (
     <Page
-      {...{
+      props={{
         play,
         pause,
         playing,
