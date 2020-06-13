@@ -7,11 +7,9 @@ const sorting = {
 
     for (let i = 0; i < array.length; i += 1) {
       let minIndex = i;
-
       for (let j = i + 1; j < array.length; j += 1) {
         if (array[j] < array[minIndex]) minIndex = j;
       }
-
       if (minIndex !== i) {
         const step = [...array];
         swap(array, i, minIndex);
