@@ -20,7 +20,7 @@
     "no-nested-ternary": 0,
     "no-param-reassign": [
       2,
-      { "props": true, "ignorePropertyModificationsFor": ["data", "input"] }
+      { "props": true, "ignorePropertyModificationsFor": ["data", "input", "nums"] }
     ]
   }
 }
