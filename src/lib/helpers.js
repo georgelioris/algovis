@@ -1,6 +1,7 @@
 export function swap(input, leftIndex, rightIndex) {
   [input[leftIndex], input[rightIndex]] = [input[rightIndex], input[leftIndex]];
 }
+
 export function partition(input, left, right, data) {
   const pivot = input[Math.floor((right + left) / 2)];
   let i = left;
@@ -23,7 +24,6 @@ export function partition(input, left, right, data) {
   return i;
 }
 
-
 export function shuffle(array) {
   const nums = [...array];
     for (let i = nums.length - 1; i > 0; i-=1) {
@@ -32,3 +32,8 @@ export function shuffle(array) {
     }
     return nums;
 }
+
+export const formatValues = (initNums) => ({
+  step: initNums,
+  pointer: { i: null, j: null }
+});

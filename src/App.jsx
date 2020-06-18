@@ -2,19 +2,14 @@ import React, { useEffect, useMemo, useRef, useState } from 'react';
 import './App.css';
 import Page from './containers/Page';
 import sorting from './lib/algorithms/sorting';
-import { shuffle } from './lib/helpers';
+import { shuffle, formatValues } from './lib/helpers';
 import nums from './lib/nums';
-
-const initValues = (initNums) => ({
-  step: initNums,
-  pointer: { i: null, j: null }
-});
 
 function App() {
   const [data, setData] = useState({});
-  const [values, setValues] = useState(initValues(nums));
+  const [unsortedNums, setUnsortedNums] = useState(shuffle(nums));
+  const [values, setValues] = useState(formatValues(unsortedNums));
   const [sortingMethod, setSortingMethod] = useState(Object.keys(sorting)[0]);
-  const [unsortedNums, setUnsortedNums] = useState(nums);
   const [playing, setPlaying] = useState(false);
   const index = useRef(0);
   const speed = useRef(200);
@@ -27,7 +22,7 @@ function App() {
   useEffect(() => {
     paused.current = true;
     index.current = 0;
-    setValues(initValues(unsortedNums));
+    setValues(formatValues(unsortedNums));
     setData(memoData);
   }, [sortingMethod, unsortedNums, memoData]);
 
