@@ -2,8 +2,7 @@ import React, { useEffect, useMemo, useRef, useState } from 'react';
 import './App.css';
 import Page from './containers/Page';
 import sorting from './lib/algorithms/sorting';
-import { shuffle, formatValues } from './lib/helpers';
-import nums from './lib/nums';
+import { nums, shuffle, formatValues } from './lib/helpers';
 
 function App() {
   const [data, setData] = useState({});

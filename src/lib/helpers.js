@@ -26,14 +26,16 @@ export function partition(input, left, right, data) {
 
 export function shuffle(array) {
   const nums = [...array];
-    for (let i = nums.length - 1; i > 0; i-=1) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [nums[i], nums[j]] = [nums[j], nums[i]];
-    }
-    return nums;
+  for (let i = nums.length - 1; i > 0; i -= 1) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [nums[i], nums[j]] = [nums[j], nums[i]];
+  }
+  return nums;
 }
 
 export const formatValues = (initNums) => ({
   step: initNums,
   pointer: { i: null, j: null }
 });
+
+export const nums = Array(...Array(100)).map((_, i) => i + 1);
