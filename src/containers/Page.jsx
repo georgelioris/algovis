@@ -18,8 +18,9 @@ const Page = ({ props: { index, data, values, playing }, props }) => (
       className="row d-flex justify-content-center"
       style={{
         padding: 'inherit',
-        maxWidth: 'inherit',
-        width: 'inehrit'
+        maxWidth: '37.5rem',
+        width: 'inehrit',
+        margin: '0 auto'
       }}
     >
       <ProgressBar
