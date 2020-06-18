@@ -27,8 +27,10 @@ function App() {
   }, [sortingMethod, unsortedNums, memoData]);
 
   function shuffleNumbers() {
-    index.current = 0;
-    setUnsortedNums(shuffle(unsortedNums));
+    if (!playing) {
+      index.current = 0;
+      setUnsortedNums(shuffle(unsortedNums));
+    }
   }
 
   function handleSpeedChange(val) {

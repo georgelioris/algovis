@@ -57,7 +57,7 @@ const Buttons = ({ playing, play, pause, shuffleNumbers }) => {
           className="controls"
           variant="primary"
           onClick={() => {
-            if (!playing) play();
+            play();
             setDisabled(false);
           }}
         >
@@ -82,7 +82,7 @@ const Buttons = ({ playing, play, pause, shuffleNumbers }) => {
         variant="primary"
         ref={shflBtn}
         onClick={() => {
-          if (!playing) shuffleNumbers();
+          shuffleNumbers();
           shflBtn.current.blur();
         }}
       >
