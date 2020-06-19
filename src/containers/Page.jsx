@@ -3,17 +3,16 @@ import PropTypes from 'prop-types';
 import ProgressBar from 'react-bootstrap/ProgressBar';
 import Controls from '../components/Controls';
 import DataContainer from '../components/DataContainer';
+import Iteration from '../components/Iteration';
 
-const Page = ({ props: { index, data, values, playing }, props }) => (
+const Page = ({ props: { index, data, values }, props }) => (
   <div className="container">
     <div className="row d-flex justify-content-center">
       <Controls {...props} />
     </div>
     <div className="row d-flex justify-content-center" />
 
-    <div className="row  d-flex justify-content-center">
-      <div>{`Iteration: ${index.current}`}</div>
-    </div>
+    <Iteration {...props} />
     <div
       className="row d-flex justify-content-center"
       style={{
@@ -24,8 +23,8 @@ const Page = ({ props: { index, data, values, playing }, props }) => (
       }}
     >
       <ProgressBar
-        now={Math.round((index.current * 100) / Object.keys(data).length)}
-        animated={playing}
+        style={{ height: '7px' }}
+        now={Math.round((index.current * 100) / (Object.keys(data).length - 1))}
       />
     </div>
     <DataContainer {...values} />

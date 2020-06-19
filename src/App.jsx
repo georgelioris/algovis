@@ -33,6 +33,20 @@ function App() {
     }
   }
 
+  function handleIndexChange(operation, value) {
+    if (operation === 0 && !Number.isNaN(value)) {
+      if (value < 0 || value > lastIndex) {
+        index.current = lastIndex;
+      } else index.current = value || 0;
+    } else if (operation === 1 && index.current + 1 <= lastIndex) {
+      index.current += 1;
+      setValues(data[index.current]);
+    } else if (operation === -1 && index.current - 1 >= 0) {
+      index.current -= 1;
+    }
+    setValues(data[index.current]);
+  }
+
   function handleSpeedChange(val) {
     speed.current = Number(val);
   }
@@ -58,9 +72,9 @@ function App() {
     }
   }
 
-  useEffect(() => {
-    console.log(unsortedNums);
-  }, [unsortedNums]);
+  // useEffect(() => {
+  //   console.log(index.current === lastIndex - 1);
+  // });
 
   return (
     <Page
@@ -75,6 +89,7 @@ function App() {
         setSortingMethod,
         data,
         index,
+        handleIndexChange,
         values
       }}
     />
