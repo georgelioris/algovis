@@ -1,3 +1,7 @@
+html > body {
+  background-color: #efefef;
+}
+
 .data-box {
   border-radius: 0.3rem;
   height: 2.8rem;
