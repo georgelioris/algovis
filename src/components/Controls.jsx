@@ -7,20 +7,22 @@ import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 
 const Methods = ({ sorting, setSortingMethod }) => (
-  <Form.Group>
-    <Form.Label>Soring Method</Form.Label>
-    <Form.Control
-      as="select"
-      size="md"
-      onChange={(e) => {
-        setSortingMethod(e.target.value);
-      }}
-    >
-      {Object.keys(sorting).map((method) => (
-        <option key={method}>{method}</option>
-      ))}
-    </Form.Control>
-  </Form.Group>
+  <Form>
+    <Form.Group>
+      <Form.Label>Soring Method</Form.Label>
+      <Form.Control
+        as="select"
+        size="md"
+        onChange={(e) => {
+          setSortingMethod(e.target.value);
+        }}
+      >
+        {Object.keys(sorting).map((method) => (
+          <option key={method}>{method}</option>
+        ))}
+      </Form.Control>
+    </Form.Group>
+  </Form>
 );
 
 const Slider = ({ speed, handleSpeedChange, playing }) => {
