@@ -10,6 +10,7 @@ function App() {
   const [values, setValues] = useState(formatValues(unsortedNums));
   const [sortingMethod, setSortingMethod] = useState(Object.keys(sorting)[0]);
   const [playing, setPlaying] = useState(false);
+  const lastIndex = Object.keys(data).length - 1;
   const index = useRef(0);
   const speed = useRef(200);
   const paused = useRef(false);
@@ -42,16 +43,16 @@ function App() {
 
   function play() {
     paused.current = false;
-    if (index.current === Object.keys(data).length) index.current = 0;
-    if (!playing && Object.keys(data).length) {
+    if (index.current === lastIndex) index.current = 0;
+    if (!playing && lastIndex) {
       setPlaying(true);
       const looping = setInterval(() => {
-        if (index.current >= Object.keys(data).length || paused.current) {
+        if (index.current >= lastIndex || paused.current) {
           setPlaying(false);
           clearInterval(looping);
         } else {
-          setValues(data[index.current]);
           index.current += 1;
+          setValues(data[index.current]);
         }
       }, speed.current);
     }
