@@ -33,18 +33,13 @@ function App() {
     }
   }
 
-  function handleIndexChange(operation, value) {
-    if (operation === 0 && !Number.isNaN(value)) {
+  function handleIndexChange(value) {
+    if (!Number.isNaN(value)) {
       if (value < 0 || value > lastIndex) {
         index.current = lastIndex;
-      } else index.current = value || 0;
-    } else if (operation === 1 && index.current + 1 <= lastIndex) {
-      index.current += 1;
+      } else index.current = value;
       setValues(data[index.current]);
-    } else if (operation === -1 && index.current - 1 >= 0) {
-      index.current -= 1;
     }
-    setValues(data[index.current]);
   }
 
   function handleSpeedChange(val) {

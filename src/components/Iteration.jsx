@@ -19,7 +19,7 @@ const Iteration = ({ index, handleIndexChange, data }) => {
             className="controls"
             variant="primary"
             onClick={() => {
-              handleIndexChange(-1);
+              handleIndexChange(index.current - 1);
             }}
           >
             <ArrowLeft size={24} />
@@ -37,7 +37,7 @@ const Iteration = ({ index, handleIndexChange, data }) => {
                 placeholder={`0-${Object.keys(data).length - 1}`}
                 value={index.current || ''}
                 onChange={(e) => {
-                  handleIndexChange(0, Number(e.target.value));
+                  handleIndexChange(Number(e.target.value));
                 }}
               />
             </Form.Group>
@@ -49,7 +49,7 @@ const Iteration = ({ index, handleIndexChange, data }) => {
             className="controls"
             variant="primary"
             onClick={() => {
-              handleIndexChange(1);
+              handleIndexChange(index.current + 1);
             }}
           >
             <ArrowRight size={24} />
