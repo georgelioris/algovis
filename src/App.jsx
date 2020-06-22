@@ -6,7 +6,8 @@ import { nums, shuffle, formatValues } from './lib/helpers';
 
 function App() {
   const [data, setData] = useState({});
-  const [unsortedNums, setUnsortedNums] = useState(shuffle(nums));
+  const [sampleSize, setSamplesSize] = useState(100);
+  const [unsortedNums, setUnsortedNums] = useState(shuffle(nums(sampleSize)));
   const [values, setValues] = useState(formatValues(unsortedNums));
   const [sortingMethod, setSortingMethod] = useState(Object.keys(sorting)[0]);
   const [playing, setPlaying] = useState(false);
@@ -25,6 +26,10 @@ function App() {
     setValues(formatValues(unsortedNums));
     setData(memoData);
   }, [sortingMethod, unsortedNums, memoData]);
+
+  useEffect(() => {
+    setUnsortedNums(shuffle(nums(sampleSize)));
+  }, [sampleSize]);
 
   function shuffleNumbers() {
     if (!playing) {
@@ -67,10 +72,6 @@ function App() {
     }
   }
 
-  // useEffect(() => {
-  //   console.log(index.current === lastIndex - 1);
-  // });
-
   return (
     <Page
       props={{
@@ -83,6 +84,8 @@ function App() {
         sorting,
         setSortingMethod,
         data,
+        sampleSize,
+        setSamplesSize,
         index,
         handleIndexChange,
         values

@@ -25,6 +25,26 @@ const Methods = ({ sorting, setSortingMethod }) => (
   </Form>
 );
 
+const Sample = ({ sampleSize, setSamplesSize }) => (
+  <Form>
+    <Form.Group>
+      <Form.Label>Sample Size</Form.Label>
+      <Form.Control
+        as="select"
+        size="md"
+        value={sampleSize}
+        onChange={(e) => {
+          setSamplesSize(Number(e.target.value));
+        }}
+      >
+        {[5, 10, 50, 100].map((size) => (
+          <option key={size}>{size}</option>
+        ))}
+      </Form.Control>
+    </Form.Group>
+  </Form>
+);
+
 const Slider = ({ speed, handleSpeedChange, playing }) => {
   const [value, setValue] = useState(speed.current);
   return (
@@ -94,36 +114,38 @@ const Buttons = ({ playing, play, pause, shuffleNumbers }) => {
   );
 };
 
-const Controls = ({
-  playing,
-  play,
-  pause,
-  shuffleNumbers,
-  speed,
-  handleSpeedChange,
-  sorting,
-  setSortingMethod
-}) => {
+const Controls = ({ ...props }) => {
   return (
-    <div className="container">
-      <div className="row  d-flex justify-content-center">
-        <Col md={3}>
-          <Methods {...{ sorting, setSortingMethod }} />
+    <>
+      <Row>
+        <Col>
+          <Methods {...props} />
         </Col>
-        <Col md={3}>
-          <Slider {...{ speed, handleSpeedChange, playing }} />
+        <Col>
+          <Sample {...props} />
         </Col>
-      </div>
-      <div className="row  d-flex justify-content-center">
-        <Buttons {...{ play, pause, playing, shuffleNumbers }} />
-      </div>
-    </div>
+      </Row>
+      <Row>
+        <Col>
+          <Slider {...props} />
+        </Col>
+      </Row>
+      <Row>
+        <Col align="center">
+          <Buttons {...props} />
+        </Col>
+      </Row>
+    </>
   );
 };
 
 Methods.propTypes = {
   sorting: PropTypes.objectOf(PropTypes.func).isRequired,
   setSortingMethod: PropTypes.func.isRequired
+};
+Sample.propTypes = {
+  sampleSize: PropTypes.number.isRequired,
+  setSamplesSize: PropTypes.func.isRequired
 };
 Slider.propTypes = {
   speed: PropTypes.shape({ current: PropTypes.number }).isRequired,
@@ -135,16 +157,6 @@ Buttons.propTypes = {
   play: PropTypes.func.isRequired,
   pause: PropTypes.func.isRequired,
   shuffleNumbers: PropTypes.func.isRequired
-};
-Controls.propTypes = {
-  playing: PropTypes.bool.isRequired,
-  play: PropTypes.func.isRequired,
-  pause: PropTypes.func.isRequired,
-  shuffleNumbers: PropTypes.func.isRequired,
-  speed: PropTypes.shape({ current: PropTypes.number }).isRequired,
-  handleSpeedChange: PropTypes.func.isRequired,
-  sorting: PropTypes.objectOf(PropTypes.func).isRequired,
-  setSortingMethod: PropTypes.func.isRequired
 };
 
 export default Controls;

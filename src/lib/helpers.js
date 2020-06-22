@@ -38,4 +38,4 @@ export const formatValues = (initNums) => ({
   pointer: { i: null, j: null }
 });
 
-export const nums = Array(...Array(100)).map((_, i) => i + 1);
+export const nums = (size) => Array(...Array(size)).map((_, i) => i + 1);
