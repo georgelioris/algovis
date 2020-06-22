@@ -3,14 +3,13 @@ import PropTypes from 'prop-types';
 import { ArrowLeft, ArrowRight } from 'react-bootstrap-icons';
 import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
-import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 
 const Iteration = ({ index, handleIndexChange, data }) => {
   const disableButton = () => index.current - 1 < 0;
   return (
-    <Container style={{ maxWidth: '37.5rem' }}>
+    <>
       <Row>
         <Col className="align-self-end">
           <Button
@@ -56,7 +55,7 @@ const Iteration = ({ index, handleIndexChange, data }) => {
           </Button>
         </Col>
       </Row>
-    </Container>
+    </>
   );
 };
 

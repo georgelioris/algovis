@@ -1,34 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ProgressBar from 'react-bootstrap/ProgressBar';
+import Container from 'react-bootstrap/Container';
 import Controls from '../components/Controls';
 import DataContainer from '../components/DataContainer';
 import Iteration from '../components/Iteration';
 
 const Page = ({ props: { index, data, values }, props }) => (
-  <div className="container">
-    <div className="row d-flex justify-content-center">
-      <Controls {...props} />
-    </div>
-    <div className="row d-flex justify-content-center" />
-
+  <Container style={{ maxWidth: '37.5rem' }}>
+    <Controls {...props} />
     <Iteration {...props} />
-    <div
-      className="row d-flex justify-content-center"
-      style={{
-        padding: 'inherit',
-        maxWidth: '37.5rem',
-        width: 'inehrit',
-        margin: '0 auto'
-      }}
-    >
-      <ProgressBar
-        style={{ height: '7px' }}
-        now={Math.round((index.current * 100) / (Object.keys(data).length - 1))}
-      />
-    </div>
+    <ProgressBar
+      style={{ height: '7px', margin: '0.7em auto' }}
+      now={Math.round((index.current * 100) / (Object.keys(data).length - 1))}
+    />
     <DataContainer {...values} />
-  </div>
+  </Container>
 );
 
 export default Page;

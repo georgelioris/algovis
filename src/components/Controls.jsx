@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { PauseFill, PlayFill, ArrowClockwise } from 'react-bootstrap-icons';
 import Button from 'react-bootstrap/Button';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
+import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 
