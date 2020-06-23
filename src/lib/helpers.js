@@ -24,6 +24,27 @@ export function partition(input, left, right, data) {
   return i;
 }
 
+export function merge(left, right, data, array) {
+  const sorted = [];
+  while (left.length && right.length) {
+    const leftIndex = array.indexOf(left[0]);
+    const rightIndex = array.indexOf(right[0]);
+    if (left[0] < right[0]) {
+      sorted.push(left.shift());
+    } else {
+      sorted.push(right.shift());
+      const step = [...array];
+      swap(array, leftIndex, rightIndex);
+      data[Object.keys(data).length] = {
+        step,
+        pointer: { i: leftIndex, j: rightIndex }
+      };
+    }
+  }
+
+  return sorted.concat(left.slice().concat(right.slice()));
+}
+
 export function shuffle(array) {
   const nums = [...array];
   for (let i = nums.length - 1; i > 0; i -= 1) {

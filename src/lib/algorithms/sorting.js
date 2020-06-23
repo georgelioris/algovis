@@ -1,4 +1,4 @@
-import { swap, partition } from '../helpers';
+import { swap, partition, merge } from '../helpers';
 
 const sorting = {
   selectionSort: (inputArr) => {
@@ -97,6 +97,26 @@ const sorting = {
     }
 
     const sortedArray = sort(array, 0, array.length - 1);
+    data[Object.keys(data).length] = { step: sortedArray, pointer: null };
+
+    return data;
+  },
+
+  mergeSort: (inputArr) => {
+    const array = [...inputArr];
+    const data = {};
+
+    function sort(input) {
+      if (input.length <= 1) return input;
+
+      const middle = Math.floor(input.length / 2);
+      const left = input.slice(0, middle);
+      const right = input.slice(middle);
+
+      return merge(sort(left), sort(right), data, array);
+    }
+
+    const sortedArray = sort(array);
     data[Object.keys(data).length] = { step: sortedArray, pointer: null };
 
     return data;
