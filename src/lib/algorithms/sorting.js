@@ -1,7 +1,7 @@
 import { swap, partition } from '../helpers';
 
 const sorting = {
-  selectionSort: inputArr => {
+  selectionSort: (inputArr) => {
     const array = [...inputArr];
     const data = {};
 
@@ -25,7 +25,7 @@ const sorting = {
     return data;
   },
 
-  bubbleSort: inputArr => {
+  bubbleSort: (inputArr) => {
     const array = [...inputArr];
     const data = {};
     let swapped = false;
@@ -51,7 +51,7 @@ const sorting = {
     return data;
   },
 
-  insertionSort: inputArr => {
+  insertionSort: (inputArr) => {
     const array = [...inputArr];
     const data = {};
 
@@ -78,7 +78,7 @@ const sorting = {
     return data;
   },
 
-  quickSort: inputArr => {
+  quickSort: (inputArr) => {
     const array = [...inputArr];
     const data = {};
 
