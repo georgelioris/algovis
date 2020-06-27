@@ -1,30 +1,6 @@
 import { swap, partition, merge } from '../helpers';
 
 const sorting = {
-  selectionSort: (inputArr) => {
-    const array = [...inputArr];
-    const data = {};
-
-    for (let i = 0; i < array.length; i += 1) {
-      const step = [...array];
-      let minIndex = i;
-      for (let j = i + 1; j < array.length; j += 1) {
-        if (array[j] < array[minIndex]) minIndex = j;
-        data[Object.keys(data).length] = {
-          step,
-          pointer: { i, j }
-        };
-      }
-      if (minIndex !== i) {
-        swap(array, i, minIndex);
-      }
-    }
-
-    data[Object.keys(data).length] = { step: array, pointer: null };
-
-    return data;
-  },
-
   bubbleSort: (inputArr) => {
     const array = [...inputArr];
     const data = {};
@@ -44,6 +20,30 @@ const sorting = {
       }
 
       if (!swapped) return data;
+    }
+
+    data[Object.keys(data).length] = { step: array, pointer: null };
+
+    return data;
+  },
+
+  selectionSort: (inputArr) => {
+    const array = [...inputArr];
+    const data = {};
+
+    for (let i = 0; i < array.length; i += 1) {
+      const step = [...array];
+      let minIndex = i;
+      for (let j = i + 1; j < array.length; j += 1) {
+        if (array[j] < array[minIndex]) minIndex = j;
+        data[Object.keys(data).length] = {
+          step,
+          pointer: { i, j }
+        };
+      }
+      if (minIndex !== i) {
+        swap(array, i, minIndex);
+      }
     }
 
     data[Object.keys(data).length] = { step: array, pointer: null };
