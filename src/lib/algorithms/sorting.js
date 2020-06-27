@@ -6,17 +6,17 @@ const sorting = {
     const data = {};
 
     for (let i = 0; i < array.length; i += 1) {
+      const step = [...array];
       let minIndex = i;
       for (let j = i + 1; j < array.length; j += 1) {
         if (array[j] < array[minIndex]) minIndex = j;
-      }
-      if (minIndex !== i) {
-        const step = [...array];
-        swap(array, i, minIndex);
         data[Object.keys(data).length] = {
           step,
-          pointer: { i, j: minIndex }
+          pointer: { i, j }
         };
+      }
+      if (minIndex !== i) {
+        swap(array, i, minIndex);
       }
     }
 
@@ -32,15 +32,15 @@ const sorting = {
 
     for (let i = 0; i < array.length; i += 1) {
       for (let j = 0; j < array.length - i; j += 1) {
+        const step = [...array];
         if (array[j + 1] < array[j]) {
-          const step = [...array];
           swap(array, j, j + 1);
-          data[Object.keys(data).length] = {
-            step,
-            pointer: { i: j, j: j + 1 }
-          };
           swapped = true;
         }
+        data[Object.keys(data).length] = {
+          step,
+          pointer: { i: j, j: j + 1 }
+        };
       }
 
       if (!swapped) return data;

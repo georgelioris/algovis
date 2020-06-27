@@ -7,16 +7,18 @@ export function partition(input, left, right, data) {
   let i = left;
   let j = right;
   while (i <= j) {
+    const step = [...input];
+    data[Object.keys(data).length] = { step, pointer: { i, j } };
     while (input[i] < pivot) {
       i += 1;
+      data[Object.keys(data).length] = { step, pointer: { i, j } };
     }
     while (input[j] > pivot) {
       j -= 1;
+      data[Object.keys(data).length] = { step, pointer: { i, j } };
     }
     if (i <= j) {
-      const step = [...input];
       swap(input, i, j);
-      data[Object.keys(data).length] = { step, pointer: { i, j } };
       i += 1;
       j -= 1;
     }
@@ -29,17 +31,17 @@ export function merge(left, right, data, array) {
   while (left.length && right.length) {
     const leftIndex = array.indexOf(left[0]);
     const rightIndex = array.indexOf(right[0]);
+    const step = [...array];
     if (left[0] < right[0]) {
       sorted.push(left.shift());
     } else {
       sorted.push(right.shift());
-      const step = [...array];
       swap(array, leftIndex, rightIndex);
-      data[Object.keys(data).length] = {
-        step,
-        pointer: { i: leftIndex, j: rightIndex }
-      };
     }
+    data[Object.keys(data).length] = {
+      step,
+      pointer: { i: leftIndex, j: rightIndex }
+    };
   }
 
   return sorted.concat(left.slice().concat(right.slice()));
