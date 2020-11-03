@@ -3,7 +3,7 @@ import { render } from '@testing-library/react';
 import App from './App';
 
 test('renders learn react link', () => {
-  const { getByText } = render(<App />);
+  const { getByText } = render(React.createElement(App));
   const linkElement = getByText(/SelectionSort/i);
   expect(linkElement).toBeInTheDocument();
 });
