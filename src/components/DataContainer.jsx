@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const DataBox = ({ value, isI, isJ }) => {
+const DataBox = ({ value, size, isI, isJ }) => {
   const background = isI
     ? '#EDB458'
     : isJ
     ? '#E8871E'
-    : `hsl(260,${100 - 100 / value}%,${100 - value}%)`;
+    : `hsl(260,${100 - size / value}%,${((size - value) / size) * 100}%)`;
   const border = `5px solid ${
     isI && !isJ ? '#EDB458' : isJ ? '#E8871E' : background
   }`;
@@ -24,10 +24,11 @@ const DataBox = ({ value, isI, isJ }) => {
   );
 };
 
-const DataContainer = ({ step, pointer }) => (
+const DataContainer = ({ step, pointer, size }) => (
   <div className="data-container">
     {step.map((value, i) => (
       <DataBox
+        size={size}
         key={value}
         value={value}
         isI={pointer && pointer.i === i}
@@ -39,6 +40,7 @@ const DataContainer = ({ step, pointer }) => (
 
 DataBox.propTypes = {
   value: PropTypes.number.isRequired,
+  size: PropTypes.number.isRequired,
   isI: PropTypes.bool,
   isJ: PropTypes.bool
 };
@@ -48,6 +50,7 @@ DataBox.defaultProps = {
 };
 DataContainer.propTypes = {
   step: PropTypes.arrayOf(PropTypes.number).isRequired,
+  size: PropTypes.number.isRequired,
   pointer: PropTypes.shape({
     i: PropTypes.number,
     j: PropTypes.number
